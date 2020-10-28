@@ -11,10 +11,9 @@ _This is an Epicodus Exercise in creating a web API for Travel Reviews._
 ## Setup/Installation Requirements
 
 * _Copy Repository_
-* _Run d_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+* _Navigate to TravelApi directory_
+* _Run "dotnet ef migrations add Initial" in your terminal_
+* _Run "dotnet ef database update" in your terminal_
 
 ## API ENDPOINTS
 
