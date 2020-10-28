@@ -10,15 +10,17 @@ _This is an Epicodus Exercise in creating a web API for Travel Reviews._
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
+* _Copy Repository_
+* _Run d_
 * _in a simple_
 * _easy-to-understand_
 * _format_
 
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this app depends on?}_
 ## API ENDPOINTS
-![](images\swaggerEndpoints.jpg)
+
+![picture](images/swaggerEndpoints.jpg)
+![picture](images/users.jpg)
+
 ## Known Bugs
 
 _There are no known bugs at this time._
