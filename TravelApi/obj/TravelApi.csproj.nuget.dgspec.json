@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\TravelApi\\TravelApi.csproj": {}
+    "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\travelapi\\TravelApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\TravelApi\\TravelApi.csproj": {
+    "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\travelapi\\TravelApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\TravelApi\\TravelApi.csproj",
+        "projectUniqueName": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\travelapi\\TravelApi.csproj",
         "projectName": "TravelApi",
-        "projectPath": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\TravelApi\\TravelApi.csproj",
+        "projectPath": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\travelapi\\TravelApi.csproj",
         "packagesPath": "C:\\Users\\Danie\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\TravelApi\\obj\\",
+        "outputPath": "C:\\Users\\Danie\\OneDrive\\Desktop\\TravelAPI.Solutions\\travelapi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -71,6 +71,10 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.0, )"
             }
           },
           "imports": [

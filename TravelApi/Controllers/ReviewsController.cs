@@ -79,6 +79,7 @@ namespace TravelApi.Controllers
       _db.SaveChanges();
     }
 
+    [Authorize]
     [HttpGet("popular")]
     public ActionResult<IEnumerable<Review>> GetMostPopular()
     {
@@ -90,6 +91,7 @@ namespace TravelApi.Controllers
       return query.OrderByDescending(x => x.Rating).ToList();
     }
 
+    [Authorize]
     [HttpGet("random")]
     public ActionResult<Review> GetRandom()
     {

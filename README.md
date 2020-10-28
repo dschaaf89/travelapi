@@ -1,12 +1,12 @@
 # _Travel Reviews API_
 
-#### _Epicodus Exercise , 10/27/2020_
+#### _Epicodus Exercise TravelAPI, 10/27/2020_
 
 #### By _**Daniel Schaaf and William Donovan-Seid**_
 
 ## Description
 
-_This is an Epicodus Exercise in using _
+_This is an Epicodus Exercise in creating a web API for Travel Reviews._
 
 ## Setup/Installation Requirements
 
@@ -17,7 +17,8 @@ _This is an Epicodus Exercise in using _
 * _format_
 
 _{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this app depends on?}_
-
+## API ENDPOINTS
+![](images\swaggerEndpoints.jpg)
 ## Known Bugs
 
 _There are no known bugs at this time._
@@ -26,6 +27,7 @@ _There are no known bugs at this time._
 
 * _C#_
 * _EntityFramework_
+* _Swagger_
 
 ### License
 

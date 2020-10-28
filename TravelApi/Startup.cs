@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using TravelApi.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using System;
+using System.IO;
+using Microsoft.OpenApi.Models;
 
 namespace TravelApi
 {
@@ -20,6 +24,8 @@ namespace TravelApi
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -29,29 +35,39 @@ namespace TravelApi
             services.AddDbContext<TravelApiContext>(opt =>
                 opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://example.com",
+                                        "http://www.contoso.com");
+                });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            // services.AddSwaggerDocument(config =>
-            // {
-            //     config.PostProcess = document =>
-            //     {
-            //         document.Info.Version = "v1";
-            //         document.Info.Title = "ToDo API";
-            //         document.Info.Description = "A simple ASP.NET Core web API";
-            //         document.Info.TermsOfService = "None";
-            //         document.Info.Contact = new NSwag.OpenApiContact
-            //         {
-            //             Name = "Shayne Boyer",
-            //             Email = string.Empty,
-            //             Url = "https://twitter.com/spboyer"
-            //         };
-            //         document.Info.License = new NSwag.OpenApiLicense
-            //         {
-            //             Name = "Use under LICX",
-            //             Url = "localhost:4000"
-            //         };
-            //     };
-            // });
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Travel Review API",
+                    Description = "An Api for Travel Reviews.",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Daniel Schaaf and William Donovan-Seid",
+                        Email = string.Empty,
+                        Url = new Uri("https://www.google.com"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("http://localhost:4005"),
+                    }
+                });
+            });
 
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -96,6 +112,20 @@ namespace TravelApi
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            app.UseCors(MyAllowSpecificOrigins);
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
 
             app.UseAuthentication();
             app.UseMvc();
