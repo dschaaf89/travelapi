@@ -23,25 +23,20 @@ namespace TravelApi.Controllers
       _db = db;
     }
 
-    // GET api/reviews?search=
+    // GET api/reviews
     [HttpGet]
-    public ActionResult<IEnumerable<Review>> Get(string search)
+    public ActionResult<IEnumerable<Review>> GetReviews([FromQuery] UrlQuery urlQuery)
     {
       var query = _db.Reviews.AsQueryable();
 
-      if (Int32.TryParse(search, out int number))
+      if (urlQuery.PageNumber.HasValue)
       {
-        if (search != null)
-        {
-          query = query.Where(entry => entry.Rating == number);
-        }
-      }
-      else if (search != null)
-      {
-        query = query.Where(entry => entry.Country.ToUpper() == search.ToUpper() || entry.City.ToUpper() == search.ToUpper());
+          sql += @" ORDER BY Contact.ContactPK
+              OFFSET @PageSize * (@PageNumber - 1) ROWS
+              FETCH NEXT @PageSize ROWS ONLY";
       }
 
-      return query.OrderByDescending(x => x.Rating).ToList();
+      return ;
     }
 
     // [Authorize]
@@ -79,7 +74,7 @@ namespace TravelApi.Controllers
       _db.SaveChanges();
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpGet("popular")]
     public ActionResult<IEnumerable<Review>> GetMostPopular()
     {
@@ -91,7 +86,7 @@ namespace TravelApi.Controllers
       return query.OrderByDescending(x => x.Rating).ToList();
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpGet("random")]
     public ActionResult<Review> GetRandom()
     {
@@ -99,6 +94,26 @@ namespace TravelApi.Controllers
       var rand = new Random();
       int temp = rand.Next(0, allReviews.Count()-1);
       return allReviews[temp];
+    }
+
+    [HttpGet("search")]
+    public ActionResult<IEnumerable<Review>> GetSearch(string search)
+    {
+      var query = _db.Reviews.AsQueryable();
+
+      if (Int32.TryParse(search, out int number))
+      {
+        if (search != null)
+        {
+          query = query.Where(entry => entry.Rating == number);
+        }
+      }
+      else if (search != null)
+      {
+        query = query.Where(entry => entry.Country.ToUpper() == search.ToUpper() || entry.City.ToUpper() == search.ToUpper());
+      }
+
+      return query.OrderByDescending(x => x.Rating).ToList();
     }
 
   }
